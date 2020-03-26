@@ -1,4 +1,36 @@
-.html {
+body {
     padding: 0cm;
     margin: 0cm;
+}
+
+body {
+    background-image: url(../src/outside.png);
+}
+
+.header {
+    text-align: center;
+    font-style: oblique;
+    font-size: 36px;
+}
+
+h1 {
+    color: darkred;
+    background-color: grey;
+}
+
+h1:hover {
+    color: black;
+}
+
+div {
+    padding-top: 2em;
+}
+
+#canvas {
+    background-image: url(../src/inside.png);
+}
+
+#game {
+    text-align: center;
+    font-size: 12px;
 }
