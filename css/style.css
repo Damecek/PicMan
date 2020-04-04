@@ -10,7 +10,7 @@ body {
 .header {
     text-align: center;
     font-style: oblique;
-    font-size: 36px;
+    font-size: 30px;
 }
 
 h1 {
@@ -23,7 +23,7 @@ h1:hover {
 }
 
 div {
-    padding-top: 2em;
+    padding-top: 0.7em;
 }
 
 #canvas {

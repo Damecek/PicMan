@@ -63,26 +63,30 @@ function movement() {
     if (keys[39]) {
         // šipka doprava
         hero.src = "../src/right.png";
-        player.x++;
+        canMove(player.x + 1, player.y) ? player.x++:null;
     }
  
     if (keys[37]) {
         // šipka doleva
         hero.src = "../src/left.png";
-        player.x--;
+        canMove(player.x - 1, player.y) ? player.x--:null;
     }
  
     if (keys[38]) {
         // šipka nahoru
         hero.src = "../src/up.png";
-        player.y--;
+        canMove(player.x, player.y - 1) ? player.y--:null;
     }
  
     if (keys[40]) {
         // šipka dolů
         hero.src = "../src/down.png";
-        player.y++;
+        canMove(player.x, player.y + 1) ? player.y++:null;
     }
+}
+
+function canMove(row, col) {
+    return row > 0 && col > 0 && (row < board.length - 1) && (col < board.length - 1) && board[row][col] != 1;
 }
 
 window.addEventListener('load', draw);
