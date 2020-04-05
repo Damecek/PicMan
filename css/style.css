@@ -1,6 +1,7 @@
 body {
     padding: 0cm;
     margin: 0cm;
+    font-family: 'Orbitron';
 }
 
 body {
@@ -13,17 +14,41 @@ body {
     font-size: 30px;
 }
 
+.row {
+    display: flex;
+}
+  
+.columnr {
+    flex: 90%;
+    text-align: left;
+} 
+
+.columnl {
+    flex: 550%;
+}
+
+.gameData {
+    font-size: 40px;
+    font-style: bold;
+    line-height: 1.5em;
+}
+
 h1 {
     color: darkred;
     background-color: grey;
+    margin-top: 1em;
 }
 
 h1:hover {
     color: black;
 }
 
+img {
+    width: 40px;
+}
+
 div {
-    padding-top: 0.7em;
+    /* padding-top: 0.7em; */
 }
 
 #canvas {
@@ -33,4 +58,5 @@ div {
 #game {
     text-align: center;
     font-size: 12px;
+    margin-left: 15%;
 }

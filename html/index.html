@@ -5,14 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PicMan</title>
     <link href="../css/style.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="header">
         <h1>Welcome to my PicMan Game</h1>
     </div>
-    <div id="game">
-        <canvas id="canvas"></canvas>
-    </div>  
+    <div class="row">
+        <div id="game" class="columnl">
+            <canvas id="canvas"></canvas>
+        </div>  
+        <div class="columnr gameData">
+            <div>
+                <img src="../src//score.png" alt="score">
+                <span id="score">0/6</span>
+            </div>
+            <div id="time">
+                00:00
+            </div>
+        </div>
+    </div>
     <script src="../js/script.js"></script>
     <!-- <script src="../js/mazeGenerator.js"></script> -->
 </body>

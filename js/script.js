@@ -2,6 +2,7 @@ let width = 600;
 let height = 600;
 let blockSize = 30;
 let nmbOfBlocks = width/blockSize;
+let nmbOfTargets = 9;
 
 let ctx = canvas.getContext('2d');
 
@@ -34,15 +35,38 @@ let board = [
 let wall = new Image();
 wall.src =  '../src/wall.png'
 
+let hero = new Image();
+hero.src = '../src/down.png';
+
+let targetsImg = [
+    new Image(),new Image(),new Image(),
+    new Image(),new Image(),new Image(), new Image()
+];
+
+targetsImg[0].src = '../src/pill1.png';
+targetsImg[1].src = '../src/pill2.png';
+targetsImg[2].src = '../src/pill3.png';
+targetsImg[3].src = '../src/pill4.png';
+targetsImg[4].src = '../src/fruit1.png';
+targetsImg[5].src = '../src/fruit2.png';
+targetsImg[6].src = '../src/tea.png';
+console.log(targetsImg);
+
+
+let targets = createTargets(nmbOfTargets);
+
+
 let player ={
     x: 8,
     y: 1
 };
 
-let hero = new Image();
-hero.src = '../src/down.png';
-
 let keys = [];
+
+function startGame() {
+    draw();
+    drawTargets();
+}
 
 function renderBoard() {
     for (let row = 0; row < board.length; row++) {
@@ -50,14 +74,14 @@ function renderBoard() {
             board[row][col] === 1 ? ctx.drawImage(wall, row * blockSize, col * blockSize, blockSize, blockSize):null;    
         }
     }
-}
+};
 
 function draw() {
     ctx.clearRect(player.x * blockSize, player.y * blockSize, blockSize, blockSize);
     renderBoard();
     movement();
     ctx.drawImage(hero, player.x * blockSize, player.y * blockSize, blockSize, blockSize);
-}
+};
 
 function movement() {
     if (keys[39]) {
@@ -83,13 +107,39 @@ function movement() {
         hero.src = "../src/down.png";
         canMove(player.x, player.y + 1) ? player.y++:null;
     }
-}
+};
 
 function canMove(row, col) {
     return row > 0 && col > 0 && (row < board.length - 1) && (col < board.length - 1) && board[row][col] != 1;
+};
+
+function createTargets(n) {
+    let trg = [];
+    for (let i = 0; i < n; i++) {
+        trg.push(getTarget());
+    }
+    return trg;
+};
+
+function getTarget() {
+    let singleTarget;
+    do {
+        singleTarget = {
+            x: Math.floor(Math.random() * board.length),
+            y: Math.floor(Math.random() * board.length),
+            img: targetsImg[Math.floor(Math.random() * targetsImg.length)]
+        };
+    } while (board[singleTarget.x][singleTarget.y] === 1);
+    return singleTarget;
+};
+
+function drawTargets() {
+    targets.forEach(t => {
+        ctx.drawImage(t.img, t.x * blockSize, t.y * blockSize, blockSize, blockSize);
+    });
 }
 
-window.addEventListener('load', draw);
+window.addEventListener('load', startGame);
 window.addEventListener('keydown', function(e){
     keys[e.keyCode] = true;
     draw();
