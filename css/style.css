@@ -51,6 +51,19 @@ div {
     /* padding-top: 0.7em; */
 }
 
+button {
+    margin-top: 30px;
+    padding: 20px 30px;
+    font-size: 20px;
+    border-radius: 60px;
+    border: 1px solid #852905;
+    font-family: 'Bitter', serif;
+    color: white;
+    background: linear-gradient(to bottom, #8a0f0f, #071633);
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
+}
+
 #canvas {
     background-image: url(../src/inside.png);
 }
@@ -59,4 +72,20 @@ div {
     text-align: center;
     font-size: 12px;
     margin-left: 15%;
+}
+
+#end {
+    width: 300px;
+    height: 300px;
+    border-radius: 10px;
+    color: white;
+    background-color: #08162e;
+    border: 2px solid #5f190c;
+    font-size: 20px;
+    position: absolute;
+    top: 60.5%;
+    left: 33.5%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    display: none;
 }

@@ -3,8 +3,15 @@ let height = 600;
 let blockSize = 30;
 let nmbOfBlocks = width/blockSize;
 let nmbOfTargets = 9;
+let limit = 60000;
 
 let ctx = canvas.getContext('2d');
+let score = document.getElementById('score');
+let time = document.getElementById('time');
+let endBlock = document.getElementById('end');
+let msg = document.getElementById('message');
+
+let timer = new Date(limit);
 
 canvas.width = width;
 canvas.height = height;
@@ -50,22 +57,30 @@ targetsImg[3].src = '../src/pill4.png';
 targetsImg[4].src = '../src/fruit1.png';
 targetsImg[5].src = '../src/fruit2.png';
 targetsImg[6].src = '../src/tea.png';
-console.log(targetsImg);
 
+let player = getInitPlayerPosition();
 
 let targets = createTargets(nmbOfTargets);
 
-
-let player ={
-    x: 8,
-    y: 1
+function getInitPlayerPosition() {
+    let p;
+    do {
+        p = {
+            x: Math.floor(Math.random() * board.length),
+            y: Math.floor(Math.random() * board.length)
+        };
+    } while (board[p.x][p.y] === 1);
+    return p;
 };
 
 let keys = [];
 
 function startGame() {
+    time.textContent = `${timer.getMinutes()}:${timer.getSeconds()}`;
+    score.textContent = `0/${nmbOfTargets}`;
     draw();
     drawTargets();
+    startTimer();
 }
 
 function renderBoard() {
@@ -76,10 +91,42 @@ function renderBoard() {
     }
 };
 
+function renderScore() {
+    score.textContent = (nmbOfTargets - targets.length).toString() + '/' + nmbOfTargets.toString();
+}
+
+function startTimer() {
+    let countDown = setInterval(function () {
+        timer = new Date(timer.getTime() - 1000);
+        time.textContent = `${timer.getMinutes()}:${timer.getSeconds()}`;
+        if (targets.length === 0) {
+            clearInterval(countDown);
+            endGame('win');
+        }
+        if (timer <= 0) {
+            clearInterval(countDown);
+            endGame('lose');
+        }
+    },1000);
+}
+
+function endGame(state) {
+    if (state === 'win') {
+        endBlock.style.display = 'block';
+        msg.textContent = 'Vyhrál jsi ty fageto-bageto-rageto!¡!';
+    } else if (state === 'lose') {
+        endBlock.style.display = 'block';
+        msg.textContent = 'Jsi jouda-bouda!!!';
+    } else {
+        console.log('wrong state');
+    }
+}
+
 function draw() {
     ctx.clearRect(player.x * blockSize, player.y * blockSize, blockSize, blockSize);
     renderBoard();
     movement();
+    collect();
     ctx.drawImage(hero, player.x * blockSize, player.y * blockSize, blockSize, blockSize);
 };
 
@@ -113,6 +160,15 @@ function canMove(row, col) {
     return row > 0 && col > 0 && (row < board.length - 1) && (col < board.length - 1) && board[row][col] != 1;
 };
 
+function collect() {
+    for (let i = 0; i < targets.length; i++) {
+        if (player.x === targets[i].x && player.y === targets[i].y) {
+            targets.splice(i, 1);
+            renderScore();
+        }
+    }
+}
+
 function createTargets(n) {
     let trg = [];
     for (let i = 0; i < n; i++) {
@@ -129,7 +185,7 @@ function getTarget() {
             y: Math.floor(Math.random() * board.length),
             img: targetsImg[Math.floor(Math.random() * targetsImg.length)]
         };
-    } while (board[singleTarget.x][singleTarget.y] === 1);
+    } while (board[singleTarget.x][singleTarget.y] === 1 || (player.x === singleTarget.x && player.y === singleTarget.y));
     return singleTarget;
 };
 

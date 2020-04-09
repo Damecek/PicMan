@@ -12,13 +12,19 @@
         <h1>Welcome to my PicMan Game</h1>
     </div>
     <div class="row">
-        <div id="game" class="columnl">
-            <canvas id="canvas"></canvas>
-        </div>  
+        <div class="columnl">
+            <span id="game">
+                <canvas id="canvas"></canvas>
+            </span>  
+            <span id="end">
+                <p id="message"></p>
+                <button onclick="location.reload()">Hraj znova!</button>
+            </span>
+        </div>
         <div class="columnr gameData">
             <div>
                 <img src="../src//score.png" alt="score">
-                <span id="score">0/6</span>
+                <span id="score">0/0</span>
             </div>
             <div id="time">
                 00:00
