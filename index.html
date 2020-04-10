@@ -4,34 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PicMan</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="/css/style.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="header">
-        <h1>Welcome to my PicMan Game</h1>
-    </div>
-    <div class="row">
-        <div class="columnl">
-            <span id="game">
-                <canvas id="canvas"></canvas>
-            </span>  
-            <span id="end">
-                <p id="message"></p>
-                <button onclick="location.reload()">Hraj znova!</button>
-            </span>
+    <div class="container">
+        <div class="row min-width">
+            <h1 class="display-3 text-center w-100">Welcome to my Game<br><strong class="text-danger">PicMan</strong></h1>
         </div>
-        <div class="columnr gameData">
-            <div>
-                <img src="/src/score.png" alt="score">
-                <span id="score">0/0</span>
+        <div class="row min-width">
+            <div class="col-xl text-right">
+                <span id="score" class="h1 display-2">0/0</span>
             </div>
-            <div id="time">
-                00:00
+            <div class="col center">
+                <span id="game">
+                    <canvas id="canvas"></canvas>
+                </span> 
+            </div>
+            <div class="col-xl text-left">
+                <div id="time" class="h1 display-2">
+                    00:00
+                </div>
             </div>
         </div>
+        <div id="end" class="col-12 justify-content-md-center">
+            <p id="message"></p>
+            <button onclick="location.reload()" class="btn btn-dark">Hraj znova!</button>
+        </div>
     </div>
+    
     <script src="/js/script.js"></script>
     <!-- <script src="../js/mazeGenerator.js"></script> -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>
 </html>

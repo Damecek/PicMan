@@ -1,56 +1,12 @@
 body {
-    padding: 0cm;
-    margin: 0cm;
-    font-family: 'Orbitron';
-}
-
-body {
-    background-image: url(../src/outside.png);
-}
-
-.header {
-    text-align: center;
-    font-style: oblique;
-    font-size: 30px;
-}
-
-.row {
-    display: flex;
-}
-  
-.columnr {
-    flex: 90%;
-    text-align: left;
-} 
-
-.columnl {
-    flex: 550%;
-}
-
-.gameData {
-    font-size: 40px;
-    font-style: bold;
-    line-height: 1.5em;
-}
-
-h1 {
-    color: darkred;
-    background-color: grey;
-    margin-top: 1em;
-}
-
-h1:hover {
-    color: black;
+    background-image: url(../src/outside.png) !important;
+    font-family: 'Black Ops One', cursive !important;
 }
 
 img {
     width: 40px;
 }
-
-div {
-    /* padding-top: 0.7em; */
-}
-
+/* 
 button {
     margin-top: 30px;
     padding: 20px 30px;
@@ -62,30 +18,29 @@ button {
     background: linear-gradient(to bottom, #8a0f0f, #071633);
     text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
+} */
+
+.min-width {
+    min-width: 600px !important;
 }
 
 #canvas {
     background-image: url(../src/inside.png);
 }
 
-#game {
-    text-align: center;
-    font-size: 12px;
-    margin-left: 15%;
-}
-
 #end {
-    width: 300px;
-    height: 300px;
+    margin-top: 80px;
+    width: 450px;
+    height: 450px;
     border-radius: 10px;
     color: white;
     background-color: #08162e;
     border: 2px solid #5f190c;
     font-size: 20px;
     position: absolute;
-    top: 60.5%;
-    left: 33.5%;
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    display: none;
+    /* display: none; */
 }
