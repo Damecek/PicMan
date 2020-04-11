@@ -2,12 +2,13 @@ let width = 600;
 let height = 600;
 let blockSize = 30;
 let nmbOfBlocks = width/blockSize;
-let nmbOfTargets = 9;
+let nmbOfTargets = 6;
 let limit = 60000;
 
 let ctx = canvas.getContext('2d');
 let score = document.getElementById('score');
 let time = document.getElementById('time');
+let startBlock = document.getElementById('start');
 let endBlock = document.getElementById('end');
 let msg = document.getElementById('message');
 let btn_playAgain = document.getElementById('btn-playAgain');
@@ -76,12 +77,23 @@ function getInitPlayerPosition() {
 
 let keys = [];
 
+function init() {
+    draw();
+}
+
 function startGame() {
     time.textContent = `${timer.getMinutes()}:${timer.getSeconds()}`;
     score.textContent = `0/${nmbOfTargets}`;
     draw();
     drawTargets();
     startTimer();
+}
+
+function setValues(numbTrgts, timeLimit) {
+    nmbOfTargets = numbTrgts;
+    limit = timeLimit;
+    startBlock.style.display = 'none';
+    startGame();
 }
 
 function renderBoard() {
@@ -200,7 +212,8 @@ function drawTargets() {
     });
 }
 
-window.addEventListener('load', startGame);
+// window.addEventListener('load', startGame);
+window.addEventListener('load', init);
 window.addEventListener('keydown', function(e){
     keys[e.keyCode] = true;
     draw();

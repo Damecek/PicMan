@@ -44,3 +44,20 @@ button {
     text-align: center;
     display: none;
 }
+
+#start {
+    margin-top: 80px;
+    width: 450px;
+    height: 450px;
+    border-radius: 10px;
+    color: white;
+    background-color: #08162e;
+    border: 2px solid #5f190c;
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    display: block;
+}
