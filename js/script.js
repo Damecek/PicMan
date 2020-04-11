@@ -10,6 +10,7 @@ let score = document.getElementById('score');
 let time = document.getElementById('time');
 let endBlock = document.getElementById('end');
 let msg = document.getElementById('message');
+let btn_playAgain = document.getElementById('btn-playAgain');
 
 let timer = new Date(limit);
 
@@ -114,9 +115,13 @@ function endGame(state) {
     if (state === 'win') {
         endBlock.style.display = 'block';
         msg.textContent = 'Vyhrál jsi ty fageto-bageto-rageto!¡!';
+        msg.classList.add('text-success');
+        btn_playAgain.classList.add('btn-success');
     } else if (state === 'lose') {
         endBlock.style.display = 'block';
         msg.textContent = 'Jsi jouda-bouda!!!';
+        msg.classList.add('text-danger');
+        btn_playAgain.classList.add('btn-danger');
     } else {
         console.log('wrong state');
     }
