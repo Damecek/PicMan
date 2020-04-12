@@ -82,6 +82,8 @@ function init() {
 }
 
 function startGame() {
+    targets = createTargets(nmbOfTargets);
+    timer = new Date(limit);
     time.textContent = `${timer.getMinutes()}:${timer.getSeconds()}`;
     score.textContent = `0/${nmbOfTargets}`;
     draw();

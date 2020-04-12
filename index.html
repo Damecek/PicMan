@@ -11,7 +11,7 @@
 <body>
     <div class="container">
         <div class="row min-width">
-            <h1 class="display-3 text-center w-100">Welcome to my Game<br><strong class="text-danger">PicMan</strong></h1>
+            <h1 class="display-2 text-center w-100">Welcome to my Game<br><strong class="text-danger">PicMan</strong></h1>
         </div>
         <div class="row min-width">
             <div class="col-xl text-right">
@@ -29,13 +29,20 @@
             </div>
         </div>
         <div id="start" class="col-12 justify-content-md-center">
-            <button onclick="setValues(6, 60000)" class="btn btn-primary">Easy</button>
-            <button onclick="setValues(10, 60000)" class="btn btn-primary">Medium</button>
-            <button onclick="setValues(6, 30000)" class="btn btn-primary">Hard</button>
+            <p class="text-center w-100 display-4">Wanna play<br>a <strong class="text-danger">game</strong>?</p>
+            <div class="row justify-content-md-center vert-space">
+                <button onclick="setValues(10, 60000)" class="btn btn-success btn-lg">Easy</button>    
+            </div>
+            <div class="row justify-content-md-center vert-space">
+                <button onclick="setValues(12, 45000)" class="btn btn-primary btn-lg">Medium</button>  
+            </div>
+            <div class="row justify-content-md-center vert-space">
+                <button onclick="setValues(14, 30000)" class="btn btn-danger btn-lg">Hard</button>                
+            </div>
         </div>
         <div id="end" class="col-12 justify-content-md-center">
-            <p id="message" class="text-center w-100"></p>
-            <button onclick="location.reload()" class="btn" id="btn-playAgain">Hraj znova!</button>
+            <p id="message" class="text-center w-100 display-4"></p>
+            <button onclick="location.reload()" class="btn btn-lg" id="btn-playAgain">Hraj znova!</button>
         </div>
     </div>
     

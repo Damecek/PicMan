@@ -6,6 +6,15 @@ body {
 img {
     width: 40px;
 }
+
+.box-sizing {
+    box-sizing: inherit !important;
+}
+
+.vert-space {
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+}
 /* 
 button {
     margin-top: 30px;
