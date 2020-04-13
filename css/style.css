@@ -15,6 +15,11 @@ img {
     margin-top: 10px !important;
     margin-bottom: 10px !important;
 }
+
+.fixed-size{
+    width: 600px !important;
+    height: 600px !important;
+}
 /* 
 button {
     margin-top: 30px;
