@@ -16,6 +16,10 @@ img {
     height: 600px !important;
 }
 
+.margin-left {
+    margin-left: 20px !important;
+}
+
 .vert-margin-1 {
     margin-top: 10px !important;
     margin-bottom: 10px !important;

@@ -16,6 +16,19 @@ function getBorderedBoard() {
     return b; //with boarders
 }
 
+function getPlusBoard() {
+    let b = getBorderedBoard();
+    b[SIZE/2][1] = 1;
+    b[SIZE/2 - 1][1] = 1;
+    b[SIZE/2][SIZE - 2] = 1;
+    b[SIZE/2 - 1][SIZE - 2] = 1;
+    b[1][SIZE/2] = 1;
+    b[1][SIZE/2 - 1] = 1;
+    b[SIZE - 2][SIZE/2] = 1;
+    b[SIZE - 2][SIZE/2 - 1] = 1;
+    return b;
+}
+
 function isBrakingContinuity(board, node) { //too many cpu operations
     function neibPaths(board, node){
         let neibs = [];
@@ -110,8 +123,19 @@ function printBoard(board) {
     }
 }
 
-function generateLabyrinth(THRESHOLD) {
-    let board = getBorderedBoard(SIZE);
+function generateLabyrinth(THRESHOLD, type) {
+    let board;
+    switch (type) {
+        case 'bordered':
+            board = getBorderedBoard(SIZE);
+            break;
+        case 'plus':
+            board = getPlusBoard();
+            break;
+        default:
+            board = getBorderedBoard(SIZE);
+            break;
+    }
     let boardMin = 0;
     let rB;
     while (boardMin <= THRESHOLD) {
@@ -133,7 +157,10 @@ function renderBoard(board) {
 }
 
 function newBoard() {
-    renderBoard(generateLabyrinth(document.getElementById('input-threshold').value));
+    renderBoard(generateLabyrinth(
+        document.getElementById('input-threshold').value,
+        document.getElementById('input-type').value)
+    );
 }
 
 // start

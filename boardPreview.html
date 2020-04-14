@@ -11,32 +11,42 @@
 <body>
     <div class="container">
         <div class="row">
-            <h1 class="display-2 text-center w-100">randomLabyrintGen Board Preview</h1>
+            <h1 class="display-3 text-center w-100">randomLabyrintGen Board Preview</h1>
         </div>
         <div class="row justify-content-md-center">
-            <div class="fixed-size">
+            <div class="col text-left">
+                <a href="./index.html" class="display-3">Game</a>
+            </div>
+            <div class="col fixed-size">
                 <span id="game">
                     <canvas id="canvas"></canvas>
                 </span> 
             </div>
-        </div>
-        <div class="row justify-content-md-center vert-margin-2">
-            <div class="input-group col-3">
-                <select class="custom-select" id="input-threshold" onchange="newBoard()">
-                  <option value="0.125">0.125</option>
-                  <option value="0.25">0.25</option>
-                  <option value="0.375" selected>0.375</option>
-                  <option value="0.5">0.5</option>
-                  <option value="0.75">0.75</option>
-                  <option value="0.875">0.875</option>
-                </select>
-                <div class="input-group-append">
-                  <button class="btn btn-primary" type="button" onclick="newBoard()">New Board</button>
+            <div class="col margin-left">
+                <div class="row vert-margin-2">
+                    <select class="custom-select" id="input-type">
+                        <option value="bordered">Bordered</option>
+                        <option value="plus">Plus</option>
+                    </select>
                 </div>
-              </div>
+                <div class="row vert-margin-2">
+                    <div class="input-group">
+                        <select class="custom-select" id="input-threshold" onchange="newBoard()">
+                          <option value="0.125">0.125</option>
+                          <option value="0.25">0.25</option>
+                          <option value="0.375" selected>0.375</option>
+                          <option value="0.5">0.5</option>
+                          <option value="0.75">0.75</option>
+                          <option value="0.875">0.875</option>
+                        </select>
+                        <div class="input-group-append">
+                          <button class="btn btn-primary" type="button" onclick="newBoard()">New Board</button>
+                        </div>
+                      </div>
+                </div>
+            </div>
         </div>
     </div>
-    <a href="./index.html" class="display-3">Game</a>
     
     <script src="/js/settings.js"></script>
     <script src="/js/randomLabyrintGen.js"></script>
