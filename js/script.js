@@ -1,8 +1,12 @@
-let width = 600;
-let height = 600;
-let blockSize = 30;
-let nmbOfBlocks = width/blockSize;
+const SIZE = 20;
+const TRESHOLD = 0.3;
+const WIDTH = 600;
+const HEIGHT = 600;
+const BLOCK_SIZE = 30;
+
+let nmbOfBlocks = WIDTH/BLOCK_SIZE;
 let nmbOfTargets = 6;
+
 let limit = 60000;
 
 let ctx = canvas.getContext('2d');
@@ -15,8 +19,8 @@ let btn_playAgain = document.getElementById('btn-playAgain');
 
 let timer = new Date(limit);
 
-canvas.width = width;
-canvas.height = height;
+canvas.width = WIDTH;
+canvas.height = HEIGHT;
 
 // let board = [
 //     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -41,7 +45,7 @@ canvas.height = height;
 //     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 // ];
 
-let board = generateLabyrinth(nmbOfBlocks, 0.3);
+let board = generateLabyrinth(TRESHOLD);
 
 let wall = new Image();
 wall.src =  '../src/wall.png'
@@ -79,10 +83,6 @@ function getInitPlayerPosition() {
 
 let keys = [];
 
-function init() {
-    draw();
-}
-
 function startGame() {
     targets = createTargets(nmbOfTargets);
     timer = new Date(limit);
@@ -93,9 +93,9 @@ function startGame() {
     startTimer();
 }
 
-function setValues(numbTrgts, timeLimit) {
+function setValues(numbTrgts, timelimit) {
     nmbOfTargets = numbTrgts;
-    limit = timeLimit;
+    limit = timelimit;
     startBlock.style.display = 'none';
     startGame();
 }
@@ -103,7 +103,7 @@ function setValues(numbTrgts, timeLimit) {
 function renderBoard() {
     for (let row = 0; row < board.length; row++) {
         for (let col = 0; col < board.length; col++){
-            board[row][col] === 1 ? ctx.drawImage(wall, row * blockSize, col * blockSize, blockSize, blockSize):null;    
+            board[row][col] === 1 ? ctx.drawImage(wall, row * BLOCK_SIZE, col * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE):null;    
         }
     }
 };
@@ -144,11 +144,11 @@ function endGame(state) {
 }
 
 function draw() {
-    ctx.clearRect(player.x * blockSize, player.y * blockSize, blockSize, blockSize);
+    ctx.clearRect(player.x * BLOCK_SIZE, player.y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
     renderBoard();
     movement();
     collect();
-    ctx.drawImage(hero, player.x * blockSize, player.y * blockSize, blockSize, blockSize);
+    ctx.drawImage(hero, player.x * BLOCK_SIZE, player.y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
 };
 
 function movement() {
@@ -212,12 +212,12 @@ function getTarget() {
 
 function drawTargets() {
     targets.forEach(t => {
-        ctx.drawImage(t.img, t.x * blockSize, t.y * blockSize, blockSize, blockSize);
+        ctx.drawImage(t.img, t.x * BLOCK_SIZE, t.y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
     });
 }
 
 // window.addEventListener('load', startGame);
-window.addEventListener('load', init);
+window.addEventListener('load', draw);
 window.addEventListener('keydown', function(e){
     keys[e.keyCode] = true;
     draw();
@@ -226,7 +226,7 @@ window.addEventListener('keyup', function(e){
     keys[e.keyCode] = false;
     draw();
 });
-
+/*
 function generateLabyrinth(size, threshold) {
     function getBoard(size) {
         return [...Array(size)].map(i => Array(size).fill(0));
@@ -299,3 +299,4 @@ function generateLabyrinth(size, threshold) {
     }
     return board;
 }
+*/
