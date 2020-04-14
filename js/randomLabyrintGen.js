@@ -1,66 +1,77 @@
-function generateLabyrinth(size, threshold) {
-    function getBoard(size) {
-        return [...Array(size)].map(i => Array(size).fill(0));
+function getBoard() {
+    return [...Array(SIZE)].map(i => Array(SIZE).fill(0));
+}
+
+function getBorderedBoard() {
+    let b = getBoard();
+    for (let col = 0; col < SIZE; col++) {
+        b[0][col] = 1;
+        b[SIZE - 1][col] = 1;
     }
 
-    function getBorderedBoard(size) {
-        let b = getBoard(size);
-        for (let col = 0; col < size; col++){
-            b[0][col] = 1;
-            b[size - 1][col] = 1;
-        }
-        
-        for (let row = 0; row < size; row++){
-            b[row][0] = 1;
-            b[row][size - 1] = 1;
-        }
-        return b; //with boarders
+    for (let row = 0; row < SIZE; row++) {
+        b[row][0] = 1;
+        b[row][SIZE - 1] = 1;
     }
+    return b; //with boarders
+}
 
-    function rankNode(board, row, col) { // TODO: if node brake continuity than 1
-        if (board[row][col] === 1) {
-            return 1;
-        }
-        let neib = 0;
-        neib += board[row + 1][col - 1];
-        neib += board[row + 1][col];
-        neib += board[row + 1][col + 1];
-        neib += board[row][col - 1];
-        neib += board[row][col + 1];
-        neib += board[row - 1][col - 1];
-        neib += board[row - 1][col];
-        neib += board[row - 1][col + 1];
-        return neib / 8;
+
+function rankNode(board, row, col) { // TODO: if node brake continuity than 1
+    if (board[row][col] === 1) {
+        return 1;
     }
-    
-    function rankBoard(board) {
-        rB = getBoard(board.length);
-        for (let row = 0; row < board.length; row++){
-            for (col = 0; col < board.length; col++){
-                rB[row][col] = rankNode(board, row, col);
+    let neib = 0;
+    neib += board[row + 1][col - 1];
+    neib += board[row + 1][col];
+    neib += board[row + 1][col + 1];
+    neib += board[row][col - 1];
+    neib += board[row][col + 1];
+    neib += board[row - 1][col - 1];
+    neib += board[row - 1][col];
+    neib += board[row - 1][col + 1];
+    return neib / 8;
+}
+
+function rankBoard(board) {
+    rB = getBoard(board.length);
+    for (let row = 0; row < board.length; row++) {
+        for (col = 0; col < board.length; col++) {
+            rB[row][col] = rankNode(board, row, col);
+        }
+    }
+    return rB;
+}
+
+function getRandomMinCoord(rB) {
+    let min = 1;
+    let minList = [];
+    for (let row = 1; row < rB.length - 1; row++) {
+        for (col = 1; col < rB.length - 1; col++) {
+            if (min > rB[row][col]) {
+                min = rB[row][col];
+                minList = [{ 'row': row, 'col': col }];
+            } else if (min === rB[row][col]) {
+                minList.push({ row, col });
             }
         }
-        return rB;
     }
-    
-    function getRandomMinCoord(rB){
-        let min = 1;
-        let minList = [];
-        for (let row = 1; row < rB.length - 1; row++){
-            for (col = 1; col < rB.length - 1; col++){
-                if (min > rB[row][col]) {
-                    min = rB[row][col];
-                    minList = [{'row': row, 'col': col}];
-                } else if (min === rB[row][col]) {
-                    minList.push({row, col});
-                }
-            }
-        }    
-        return minList[Math.floor(Math.random() * minList.length)];
-    }
-    // start
+    return minList[Math.floor(Math.random() * minList.length)];
+}
 
-    let board = getBorderedBoard(size);
+function printBoard(board) {
+    let line = '';
+    for (let row = 0; row < rB.length; row++) {
+        for (col = 0; col < rB.length; col++) {
+            line += board[row][col] == 1 ? 'x' : ' ';
+        }
+        console.log(line);
+        line = '';
+    }
+}
+
+function generateLabyrinth(threshold) {
+    let board = getBorderedBoard(SIZE);
     let boardMin = 0;
     let rB;
     while (boardMin <= threshold) {
@@ -72,38 +83,32 @@ function generateLabyrinth(size, threshold) {
     return board;
 }
 
-function printBoard(board){
-    let line = '';
-    for (let row = 0; row < rB.length; row++){
-        for (col = 0; col < rB.length; col++){
-            line += board[row][col] == 1 ? 'x' : ' ';
-        }
-        console.log(line);
-        line = '';
-    }    
-}
-
-function newBoard() {
-    renderBoard(generateLabyrinth(20, 0.5));
-}
-
-let width = 600;
-let height = 600;
-canvas.width = width;
-canvas.height = height;
-let blockSize = 30;
-let ctx = canvas.getContext('2d');
-
-let wall = new Image();
-wall.src =  '../src/wall.png'
-
 function renderBoard(board) {
     for (let row = 0; row < board.length; row++) {
-        for (let col = 0; col < board.length; col++){
-            ctx.clearRect(row * blockSize, col * blockSize, blockSize, blockSize);    
-            board[row][col] === 1 ? ctx.drawImage(wall, row * blockSize, col * blockSize, blockSize, blockSize):null;    
+        for (let col = 0; col < board.length; col++) {
+            ctx.clearRect(row * BLOCK_SIZE, col * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
+            board[row][col] === 1 ? ctx.drawImage(wall, row * BLOCK_SIZE, col * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE) : null;
         }
     }
 }
 
-window.addEventListener('load', renderBoard(generateLabyrinth(20, 0.3)));
+function newBoard() {
+    renderBoard(generateLabyrinth(TRESHOLD));
+}
+
+// SETTINGS
+const SIZE = 20;
+const TRESHOLD = 0.3;
+const WIDTH = 600;
+const HEIGHT = 600;
+const BLOCK_SIZE = 30;
+
+canvas.width = WIDTH;
+canvas.height = HEIGHT;
+let ctx = canvas.getContext('2d');
+
+let wall = new Image();
+wall.src = '../src/wall.png';
+
+// start
+window.addEventListener('load', newBoard());
