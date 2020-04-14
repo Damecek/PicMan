@@ -95,7 +95,7 @@ function renderBoard(board) {
 function newBoard() {
     renderBoard(generateLabyrinth(TRESHOLD));
 }
-
+/*
 // SETTINGS
 const SIZE = 20;
 const TRESHOLD = 0.3;
@@ -112,3 +112,4 @@ wall.src = '../src/wall.png';
 
 // start
 window.addEventListener('load', newBoard());
+*/
