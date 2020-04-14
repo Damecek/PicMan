@@ -93,12 +93,12 @@ function renderBoard(board) {
 }
 
 function newBoard() {
-    renderBoard(generateLabyrinth(TRESHOLD));
+    renderBoard(generateLabyrinth(THRESHOLD));
 }
 
 // SETTINGS
 const SIZE = 20;
-const TRESHOLD = 0.3;
+const THRESHOLD = 0.3;
 const WIDTH = 600;
 const HEIGHT = 600;
 const BLOCK_SIZE = 30;
