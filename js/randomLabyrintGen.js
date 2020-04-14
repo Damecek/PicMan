@@ -17,7 +17,7 @@ function generateLabyrinth(size, threshold) {
         return b; //with boarders
     }
 
-    function rankNode(board, row, col) {
+    function rankNode(board, row, col) { // TODO: if node brake continuity than 1
         if (board[row][col] === 1) {
             return 1;
         }
@@ -84,7 +84,7 @@ function printBoard(board){
 }
 
 function newBoard() {
-    renderBoard(generateLabyrinth(20, 0.3));
+    renderBoard(generateLabyrinth(20, 0.5));
 }
 
 let width = 600;
