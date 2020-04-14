@@ -1,5 +1,5 @@
 const SIZE = 20;
-const TRESHOLD = 0.3;
+const THRESHOLD = 0.3;
 const WIDTH = 600;
 const HEIGHT = 600;
 const BLOCK_SIZE = 30;
@@ -45,7 +45,7 @@ canvas.height = HEIGHT;
 //     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 // ];
 
-let board = generateLabyrinth(TRESHOLD);
+let board = generateLabyrinth(THRESHOLD);
 
 let wall = new Image();
 wall.src =  '../src/wall.png'

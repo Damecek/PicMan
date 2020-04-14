@@ -16,11 +16,51 @@ function getBorderedBoard() {
     return b; //with boarders
 }
 
+function isBrakingContinuity(board, node) { //too many cpu operations
+    function neibPaths(board, node){
+        let neibs = [];
+        for (let row = -1; row < 2; row++){
+            for (let col = -1; col < 2; col++){
+                if (col === 0 && row == 0){
+                    //pass
+                }
+                else if (board[node.row + row][node.col + col] === 0){
+                    neibs.push({'row': node.row + row, 'col': node.col + col});
+                }
+            }
+        }
+        return neibs;
+    }
+    board[node.row][node.col] = 1;
+    let trace = [];
+    let stack = [node];    
+    while (stack.length > 0) {
+        neibPaths(board, stack.pop()).forEach(e => {
+            if (trace.includes(e) || stack.includes(e)){
+                //pass
+            } else {
+                stack.push(e);
+                trace.push(e);
+            }
+        });
+    }
+    for (let row = 1; row < board.length - 1; row++) {
+        for (let col = 1; col < board.length - 1; col++) {
+            if (board[row][col] === 0 && !trace.includes({'row': row, 'col': col})){
+                return true;
+            }
+        }
+    }
+    return false;
+}
 
-function rankNode(board, row, col) { // TODO: if node brake continuity than 1
+function rankNode(board, row, col) { // TODO: if node brake continuity then 1
     if (board[row][col] === 1) {
         return 1;
     }
+    /* if (isBrakingContinuity(board, {'row': row, 'col': col})){
+        return 1;
+    } */
     let neib = 0;
     neib += board[row + 1][col - 1];
     neib += board[row + 1][col];
@@ -36,7 +76,7 @@ function rankNode(board, row, col) { // TODO: if node brake continuity than 1
 function rankBoard(board) {
     rB = getBoard(board.length);
     for (let row = 0; row < board.length; row++) {
-        for (col = 0; col < board.length; col++) {
+        for (let col = 0; col < board.length; col++) {
             rB[row][col] = rankNode(board, row, col);
         }
     }
@@ -47,7 +87,7 @@ function getRandomMinCoord(rB) {
     let min = 1;
     let minList = [];
     for (let row = 1; row < rB.length - 1; row++) {
-        for (col = 1; col < rB.length - 1; col++) {
+        for (let col = 1; col < rB.length - 1; col++) {
             if (min > rB[row][col]) {
                 min = rB[row][col];
                 minList = [{ 'row': row, 'col': col }];
@@ -62,7 +102,7 @@ function getRandomMinCoord(rB) {
 function printBoard(board) {
     let line = '';
     for (let row = 0; row < rB.length; row++) {
-        for (col = 0; col < rB.length; col++) {
+        for (let col = 0; col < rB.length; col++) {
             line += board[row][col] == 1 ? 'x' : ' ';
         }
         console.log(line);
@@ -70,11 +110,11 @@ function printBoard(board) {
     }
 }
 
-function generateLabyrinth(threshold) {
+function generateLabyrinth(THRESHOLD) {
     let board = getBorderedBoard(SIZE);
     let boardMin = 0;
     let rB;
-    while (boardMin <= threshold) {
+    while (boardMin <= THRESHOLD) {
         rB = rankBoard(board);
         minCoord = getRandomMinCoord(rB);
         board[minCoord.row][minCoord.col] = 1;
@@ -95,7 +135,7 @@ function renderBoard(board) {
 function newBoard() {
     renderBoard(generateLabyrinth(THRESHOLD));
 }
-/*
+
 // SETTINGS
 const SIZE = 20;
 const THRESHOLD = 0.3;
@@ -112,4 +152,4 @@ wall.src = '../src/wall.png';
 
 // start
 window.addEventListener('load', newBoard());
-*/
+
