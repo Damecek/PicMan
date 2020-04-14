@@ -133,9 +133,8 @@ function renderBoard(board) {
 }
 
 function newBoard() {
-    renderBoard(generateLabyrinth(THRESHOLD));
+    renderBoard(generateLabyrinth(document.getElementById('input-threshold').value));
 }
 
 // start
 window.addEventListener('load', newBoard());
-

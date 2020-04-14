@@ -95,12 +95,12 @@ function startTimer() {
 function endGame(state) {
     if (state === 'win') {
         endBlock.style.display = 'block';
-        msg.textContent = 'Vyhrál jsi ty fageto-bageto-rageto!¡!';
+        msg.textContent = 'Vyhrál jsi ty fageto bageto rageto!¡!';
         msg.classList.add('text-success');
         btn_playAgain.classList.add('btn-success');
     } else if (state === 'lose') {
         endBlock.style.display = 'block';
-        msg.textContent = 'Jsi jouda-bouda!!!';
+        msg.textContent = 'Jsi jouda bouda!!!';
         msg.classList.add('text-danger');
         btn_playAgain.classList.add('btn-danger');
     } else {
