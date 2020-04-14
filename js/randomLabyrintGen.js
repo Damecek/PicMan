@@ -16,7 +16,8 @@ function getBorderedBoard() {
     return b; //with boarders
 }
 
-function rankNode(board, row, col) {
+
+function rankNode(board, row, col) { // TODO: if node brake continuity than 1
     if (board[row][col] === 1) {
         return 1;
     }
