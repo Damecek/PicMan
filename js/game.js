@@ -1,15 +1,8 @@
-const SIZE = 20;
-const THRESHOLD = 0.3;
-const WIDTH = 600;
-const HEIGHT = 600;
-const BLOCK_SIZE = 30;
 
-let nmbOfBlocks = WIDTH/BLOCK_SIZE;
 let nmbOfTargets = 6;
 
 let limit = 60000;
 
-let ctx = canvas.getContext('2d');
 let score = document.getElementById('score');
 let time = document.getElementById('time');
 let startBlock = document.getElementById('start');
@@ -19,36 +12,8 @@ let btn_playAgain = document.getElementById('btn-playAgain');
 
 let timer = new Date(limit);
 
-canvas.width = WIDTH;
-canvas.height = HEIGHT;
-
-// let board = [
-//     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-//     [1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1],
-//     [1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1],
-//     [1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1],
-//     [1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1],
-//     [1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1],
-//     [1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1],
-//     [1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1],
-//     [1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1],
-//     [1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-//     [1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 1],
-//     [1, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1],
-//     [1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1],
-//     [1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1],
-//     [1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1],
-//     [1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1],
-//     [1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 0, 1, 1],
-//     [1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1],
-//     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1],
-//     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-// ];
-
 let board = generateLabyrinth(THRESHOLD);
 
-let wall = new Image();
-wall.src =  '../src/wall.png'
 
 let hero = new Image();
 hero.src = '../src/down.png';
@@ -226,77 +191,3 @@ window.addEventListener('keyup', function(e){
     keys[e.keyCode] = false;
     draw();
 });
-/*
-function generateLabyrinth(size, threshold) {
-    function getBoard(size) {
-        return [...Array(size)].map(i => Array(size).fill(0));
-    }
-
-    function getBorderedBoard(size) {
-        let b = getBoard(size);
-        for (let col = 0; col < size; col++){
-            b[0][col] = 1;
-            b[size - 1][col] = 1;
-        }
-        
-        for (let row = 0; row < size; row++){
-            b[row][0] = 1;
-            b[row][size - 1] = 1;
-        }
-        return b; //with boarders
-    }
-
-    function rankNode(board, row, col) {
-        if (board[row][col] === 1) {
-            return 1;
-        }
-        let neib = 0;
-        neib += board[row + 1][col - 1];
-        neib += board[row + 1][col];
-        neib += board[row + 1][col + 1];
-        neib += board[row][col - 1];
-        neib += board[row][col + 1];
-        neib += board[row - 1][col - 1];
-        neib += board[row - 1][col];
-        neib += board[row - 1][col + 1];
-        return neib / 8;
-    }
-    
-    function rankBoard(board) {
-        rB = getBoard(board.length);
-        for (let row = 0; row < board.length; row++){
-            for (col = 0; col < board.length; col++){
-                rB[row][col] = rankNode(board, row, col);
-            }
-        }
-        return rB;
-    }
-    
-    function getRandomMinCoord(rB){
-        let min = 1;
-        let minList = [];
-        for (let row = 1; row < rB.length - 1; row++){
-            for (col = 1; col < rB.length - 1; col++){
-                if (min > rB[row][col]) {
-                    min = rB[row][col];
-                    minList = [{'row': row, 'col': col}];
-                } else if (min === rB[row][col]) {
-                    minList.push({row, col});
-                }
-            }
-        }    
-        return minList[Math.floor(Math.random() * minList.length)];
-    }
-
-    let board = getBorderedBoard(size);
-    let boardMin = 0;
-    let Rb;
-    while (boardMin <= threshold) {
-        rB = rankBoard(board);
-        minCoord = getRandomMinCoord(rB);
-        board[minCoord.row][minCoord.col] = 1;
-        boardMin = rB[minCoord.row][minCoord.col];
-    }
-    return board;
-}
-*/
